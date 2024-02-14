@@ -22,6 +22,7 @@ function App() {
   const [userLoading, setUserLoading] = useState(false);
   const handleLoadData = (id) => {
     setUserLoading(true);
+    setUserData(null);
     axios
       .get(`https://602e7c2c4410730017c50b9d.mockapi.io/users/${id}`)
       .then((res) => {
@@ -122,7 +123,7 @@ function App() {
                 style={{ height: "82vh", overflow: "auto" }}
                 className="col example border rounded-4"
               >
-                <h1 className="fs-5 p-3">User Details :</h1>
+                {userData && <h1 className="fs-5 p-3">User Details :</h1>}
                 {!userData && !userLoading && (
                   <h1
                     style={{
@@ -139,7 +140,7 @@ function App() {
                     {"Select An User To View Details"}
                   </h1>
                 )}
-                {userLoading && userData ? (
+                {userLoading && userData === null ? (
                   <div
                     style={{ height: "80vh" }}
                     className="d-flex justify-content-center align-items-center"
