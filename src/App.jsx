@@ -195,27 +195,31 @@ function App() {
                                 alt=""
                               />
                             )}
-                            <h1 className="mt-3 fs-4">
-                              Name :{" "}
-                              {userData?.profile?.firstName +
-                                " " +
-                                userData?.profile?.lastName}
-                            </h1>
-                            <h3 className="mt-3 fs-5 fw-normal">
-                              Id : {userData?.id}
-                            </h3>
-                            <h3 className="mt-3 fs-5 fw-normal">
-                              Bio : {userData?.Bio}
-                            </h3>
-                            <h3 className="mt-3 fs-5 fw-normal">
-                              JobTitle : {userData?.jobTitle}
-                            </h3>
-                            <h3 className="mt-3 fs-5 fw-normal">
-                              email : {userData?.profile?.email}
-                            </h3>
-                            <h3 className="mt-3 fs-5 fw-normal">
-                              username : {userData?.profile?.username}
-                            </h3>
+                            {userData !== null && (
+                              <>
+                                <h1 className="mt-3 fs-4">
+                                  Name :{" "}
+                                  {userData?.profile?.firstName +
+                                    " " +
+                                    userData?.profile?.lastName}
+                                </h1>
+                                <h3 className="mt-3 fs-5 fw-normal">
+                                  Id : {userData?.id}
+                                </h3>
+                                <h3 className="mt-3 fs-5 fw-normal">
+                                  Bio : {userData?.Bio}
+                                </h3>
+                                <h3 className="mt-3 fs-5 fw-normal">
+                                  JobTitle : {userData?.jobTitle}
+                                </h3>
+                                <h3 className="mt-3 fs-5 fw-normal">
+                                  email : {userData?.profile?.email}
+                                </h3>
+                                <h3 className="mt-3 fs-5 fw-normal">
+                                  username : {userData?.profile?.username}
+                                </h3>
+                              </>
+                            )}
                           </div>
                         </div>
                       </>
