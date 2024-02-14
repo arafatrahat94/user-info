@@ -137,7 +137,7 @@ function App() {
               </div>
               <div
                 style={{ height: "82vh", overflow: "auto" }}
-                className="col example border rounded-4"
+                className="col example2 border rounded-4"
               >
                 {userData && <h1 className="fs-5 p-3">User Details :</h1>}
                 {!userData && !userLoading && (
