@@ -29,8 +29,24 @@ function App() {
         setTimeout(() => {
           setUserLoading(false);
         }, 500);
+        if (
+          res.data === "Not found" ||
+          res.data === null ||
+          res.data === undefined
+        ) {
+          setUserData("Not found");
+
+          return;
+        }
         setUserData(res.data);
-        console.log(res.data);
+      })
+      .catch((err) => {
+        if (err.response.status === 404) {
+          setUserData("Not found");
+          setUserLoading(false);
+          return;
+        }
+        console.log(err.response.status);
       });
   };
   return (
@@ -141,7 +157,7 @@ function App() {
                   </h1>
                 )}
                 {userLoading && userData === null ? (
-                  <div
+                  <h1
                     style={{ height: "80vh" }}
                     className="d-flex justify-content-center align-items-center"
                   >
@@ -151,48 +167,59 @@ function App() {
                     >
                       <span className="visually-hidden">Loading...</span>
                     </div>
-                  </div>
+                  </h1>
                 ) : (
                   <>
-                    <div className="mx-4">
-                      <div>
-                        {userData?.avatar?.includes(
-                          "https://cdn.fakercloud.com/"
-                        ) ? (
-                          <h1 className="fs-4 mt-5 p-3 text-center">
-                            Profile Image Not Found
-                          </h1>
-                        ) : (
-                          <img
-                            style={{ width: "40%" }}
-                            className="mt-5 mx-auto d-block rounded-5 shadow shadow-sm"
-                            src={userData?.avatar}
-                            alt=""
-                          />
-                        )}
-                        <h1 className="mt-3 fs-4">
-                          Name :{" "}
-                          {userData?.profile?.firstName +
-                            " " +
-                            userData?.profile?.lastName}
-                        </h1>
-                        <h3 className="mt-3 fs-5 fw-normal">
-                          Id : {userData?.id}
-                        </h3>
-                        <h3 className="mt-3 fs-5 fw-normal">
-                          Bio : {userData?.Bio}
-                        </h3>
-                        <h3 className="mt-3 fs-5 fw-normal">
-                          JobTitle : {userData?.jobTitle}
-                        </h3>
-                        <h3 className="mt-3 fs-5 fw-normal">
-                          email : {userData?.profile?.email}
-                        </h3>
-                        <h3 className="mt-3 fs-5 fw-normal">
-                          username : {userData?.profile?.username}
-                        </h3>
-                      </div>
-                    </div>
+                    {userData === "Not found" ? (
+                      <h1
+                        style={{ height: "80vh" }}
+                        className="d-flex justify-content-center align-items-center fs-4"
+                      >
+                        User Data Not Found
+                      </h1>
+                    ) : (
+                      <>
+                        <div className="mx-4">
+                          <div>
+                            {userData?.avatar?.includes(
+                              "https://cdn.fakercloud.com/"
+                            ) ? (
+                              <h1 className="fs-4 mt-5 p-3 text-center">
+                                Profile Image Not Found
+                              </h1>
+                            ) : (
+                              <img
+                                style={{ width: "40%" }}
+                                className="mt-5 mx-auto d-block rounded-5 shadow shadow-sm"
+                                src={userData?.avatar}
+                                alt=""
+                              />
+                            )}
+                            <h1 className="mt-3 fs-4">
+                              Name :{" "}
+                              {userData?.profile?.firstName +
+                                " " +
+                                userData?.profile?.lastName}
+                            </h1>
+                            <h3 className="mt-3 fs-5 fw-normal">
+                              Id : {userData?.id}
+                            </h3>
+                            <h3 className="mt-3 fs-5 fw-normal">
+                              Bio : {userData?.Bio}
+                            </h3>
+                            <h3 className="mt-3 fs-5 fw-normal">
+                              JobTitle : {userData?.jobTitle}
+                            </h3>
+                            <h3 className="mt-3 fs-5 fw-normal">
+                              email : {userData?.profile?.email}
+                            </h3>
+                            <h3 className="mt-3 fs-5 fw-normal">
+                              username : {userData?.profile?.username}
+                            </h3>
+                          </div>
+                        </div>
+                      </>
+                    )}
                   </>
                 )}
               </div>
